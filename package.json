@@ -9,11 +9,17 @@
   "repository": "https://github.com/luke-john-atlassian/chrome-extension-boilerplate-react.git",
   "author": "Luke John <github@lukejohn.me>",
   "license": "MIT",
+  "scripts": {
+    "changeset": "npx changeset"
+  },
   "workspaces": [
     "packages/chrome-extension",
     "packages/shared-ui",
     "packages/shared-utils",
     "packages/prosemirror-plugin",
     "packages/example"
-  ]
+  ],
+  "dependencies": {
+    "@changesets/cli": "^2.16.0"
+  }
 }
