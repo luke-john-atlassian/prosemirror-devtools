@@ -1,7 +1,7 @@
 {
   "name": "@luke-john/prosemirror-devtools-shared-utils",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.1.0",
   "description": "",
   "source": "src/index.ts",
   "main": "dist/index.js",
