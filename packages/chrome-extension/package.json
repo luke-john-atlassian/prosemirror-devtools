@@ -1,12 +1,8 @@
 {
   "name": "@luke-john/prosemirror-devtools-chrome-extension",
-  "version": "4.0.1",
-  "description": "A chrome extension to aid atlaskit-prosemirror development",
+  "version": "0.0.0",
+  "description": "A chrome extension to aid prosemirror development",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/luke-john-atlassian/chrome-extension-boilerplate-react.git"
-  },
   "browserslist": {
     "development": [
       "last 1 Chrome version"
