@@ -102,8 +102,7 @@ export function getHistoryEntry(
   editorState: EditorState<any>,
   tr?: Transaction
 ): HistoryEntry {
-  const trString = safeStringify(tr);
-  const transaction = trString ? JSON.parse(trString) : undefined;
+  const transaction = tr ? getSerializableTransaction(tr) : undefined;
 
   return {
     doc: getSerializableDocument(editorState.doc),
@@ -112,19 +111,46 @@ export function getHistoryEntry(
   };
 }
 
-function safeStringify(obj: any, indent = 2) {
-  let cache: any[] = [];
+function getSerializableTransaction(tr: Transaction<any>) {
+  const serializedTransaction: any = {}
 
-  const retVal = JSON.stringify(
+  for (const trKey of Object.keys(tr)) {
+    // metas can be quite expensive
+    const limit = trKey === 'meta' ? 20 : undefined
+    
+    // @ts-ignore
+    serializedTransaction[trKey] = JSON.parse(safeStringify(tr[trKey], 2, limit));
+  }
+
+  return serializedTransaction 
+}
+
+function safeStringify(obj: any, indent = 2, limit: number | undefined = undefined) {
+  let cache: any[] = [];
+  let valueCount = 0
+
+  const stringified = JSON.stringify(
     obj,
-    (key, value) =>
-      typeof value === "object" && value !== null
-        ? cache.includes(value)
-          ? undefined // Duplicate reference found, discard key
-          : cache.push(value) && value // Store value in our collection
-        : value,
+    (key, value) => {
+      if (limit) {
+        valueCount = valueCount + 1
+
+        if (valueCount === limit) {
+          return undefined // Limit reached, discard key
+        }
+      }
+      if (typeof value === "object" && value !== null) {
+        if (cache.includes(value)) {
+          return undefined // Duplicate reference found, discard key
+        } else {
+          cache.push(value) && value // Store value in our collection
+        }
+
+      }
+      return value
+    },
     indent
   );
 
-  return retVal;
+  return stringified;
 }
