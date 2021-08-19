@@ -43,7 +43,12 @@ function createPluginState(editorState: EditorState<any>): DevtoolsPluginState {
     update: (editorState: EditorState<any>, tr: Transaction<any>) => {
       devToolsPluginState.editorState = editorState;
       devToolsPluginState.updated = Date.now();
-      devToolsPluginState.history.push(getHistoryEntry(editorState, tr));
+      const newLength = devToolsPluginState.history.unshift(
+        getHistoryEntry(editorState, tr)
+      );
+      if (newLength > 50) {
+        devToolsPluginState.history.pop();
+      }
     },
     unregister: () => {
       trackedPluginStates.delete(devToolsPluginState);

@@ -1,7 +1,7 @@
 {
   "name": "@luke-john/prosemirror-devtools-plugin",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "source": "src/index.ts",
   "main": "dist/index.js",

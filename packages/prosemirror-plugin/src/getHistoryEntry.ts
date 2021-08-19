@@ -112,45 +112,54 @@ export function getHistoryEntry(
 }
 
 function getSerializableTransaction(tr: Transaction<any>) {
-  const serializedTransaction: any = {}
+  const serializedTransaction: any = {};
 
   for (const trKey of Object.keys(tr)) {
-    // metas can be quite expensive
-    const limit = trKey === 'meta' ? 20 : undefined
-    
-    // @ts-ignore
-    serializedTransaction[trKey] = JSON.parse(safeStringify(tr[trKey], 2, limit));
+    // metas and docs can be quite expensive
+    const limit = ["meta", "doc"].includes(trKey) ? 50 : undefined;
+
+    serializedTransaction[trKey] = safeJsonStringifyAndParse(
+      // @ts-ignore
+      tr[trKey],
+      2,
+      limit
+    );
   }
 
-  return serializedTransaction 
+  return serializedTransaction;
 }
 
-function safeStringify(obj: any, indent = 2, limit: number | undefined = undefined) {
+function safeJsonStringifyAndParse(
+  obj: any,
+  indent = 2,
+  limit: number | undefined = undefined
+) {
   let cache: any[] = [];
-  let valueCount = 0
+  let valueCount = 0;
 
   const stringified = JSON.stringify(
     obj,
     (key, value) => {
       if (limit) {
-        valueCount = valueCount + 1
-
         if (valueCount === limit) {
-          return undefined // Limit reached, discard key
+          return undefined; // Limit reached, discard key
+        } else {
+          valueCount = valueCount + 1;
         }
       }
       if (typeof value === "object" && value !== null) {
         if (cache.includes(value)) {
-          return undefined // Duplicate reference found, discard key
+          return undefined; // Duplicate reference found, discard key
         } else {
-          cache.push(value) && value // Store value in our collection
+          cache.push(value) && value; // Store value in our collection
         }
-
       }
-      return value
+      return value;
     },
     indent
   );
 
-  return stringified;
+  const parsed = JSON.parse(stringified);
+
+  return parsed;
 }
