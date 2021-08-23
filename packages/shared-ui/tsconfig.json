@@ -74,8 +74,12 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "moduleResolution": "Node",
     "paths": {
-      "@luke-john/prosemirror-devtools-shared-utils": ["../shared-utils"],
-      "@luke-john/prosemirror-devtools-plugin": ["../prosemirror-plugin"]
+      "@luke-john/prosemirror-devtools-shared-utils": [
+        "../shared-utils/src/index.ts"
+      ],
+      "@luke-john/prosemirror-devtools-plugin": [
+        "../prosemirror-plugin/src/index.ts"
+      ]
     }
   },
   "include": ["src"],

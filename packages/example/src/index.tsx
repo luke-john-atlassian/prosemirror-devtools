@@ -1,5 +1,3 @@
-import "normalize.css";
-
 import "./editor.css";
 
 import { EditorState } from "prosemirror-state";
@@ -8,10 +6,12 @@ import { schema } from "prosemirror-schema-basic";
 // @ts-ignore
 import { exampleSetup } from "prosemirror-example-setup";
 
-import { prosemirrorDevtoolsPlugin } from "@luke-john/prosemirror-devtools-plugin";
+import { createPlugin as createProsemirrorDevtoolsPlugin } from "@luke-john/prosemirror-devtools-plugin";
+
+const devtoolsPlugin = createProsemirrorDevtoolsPlugin("page");
 
 const plugins = exampleSetup({ schema });
-plugins.push(prosemirrorDevtoolsPlugin);
+plugins.push(devtoolsPlugin);
 
 let doc = schema.node("doc", undefined, [
   schema.node("paragraph", undefined, [schema.text("One.")]),
@@ -20,6 +20,10 @@ let doc = schema.node("doc", undefined, [
 ]);
 
 new EditorView(document.querySelector("#app0")!, {
+  state: EditorState.create({ schema, plugins, doc }),
+});
+
+new EditorView(document.querySelector("#app1")!, {
   state: EditorState.create({ schema, plugins, doc }),
 });
 

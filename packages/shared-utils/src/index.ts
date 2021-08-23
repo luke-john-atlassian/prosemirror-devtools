@@ -1,3 +1,6 @@
-import { getMessageUtils } from "./createMessage";
+import { setupExportedActions } from "./setupExportedActions";
+import { setupImportedActions } from "./setupImportedActions";
 
-export { getMessageUtils };
+export type { AsyncActions } from "./setupImportedActions";
+
+export { setupExportedActions, setupImportedActions };

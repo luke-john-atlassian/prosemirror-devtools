@@ -1,0 +1,35 @@
+{
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "alias": {
+    "@luke-john/prosemirror-devtools-plugin": "../prosemirror-plugin/src/index.ts",
+    "@luke-john/prosemirror-devtools-shared-ui": "../shared-ui/src/index.tsx",
+    "@luke-john/prosemirror-devtools-shared-utils": "../shared-utils/src/index.ts"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.2",
+    "react-async-hook": "^3.6.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "react-inspector": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "electron": "^13.2.1",
+    "typescript": "^4.3.2",
+    "vite": "^2.4.2"
+  },
+  "author": "Luke John and Alla Kholmatova",
+  "license": "GPL-3.0-or-later"
+}

@@ -12,6 +12,13 @@ const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 var alias = {
   react: path.resolve(__dirname, './node_modules/react'),
+  '@emotion/styled': path.resolve(__dirname, './node_modules/@emotion/styled'),
+  'react-inspector': path.resolve(__dirname, './node_modules/react-inspector'),
+
+  'react-async-hook': path.resolve(
+    __dirname,
+    './node_modules/react-async-hook'
+  ),
   '@luke-john/prosemirror-devtools-plugin': path.resolve(
     __dirname,
     '../prosemirror-plugin/src/index.ts'
@@ -22,7 +29,7 @@ var alias = {
   ),
   '@luke-john/prosemirror-devtools-shared-utils': path.resolve(
     __dirname,
-    '../shared-utils/src/index.tsx'
+    '../shared-utils/src/index.ts'
   ),
 };
 
@@ -49,13 +56,25 @@ if (fileSystem.existsSync(secretsPath)) {
 var options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.ts'),
-    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.ts'),
-    devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.ts'),
-    panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.tsx'),
+    background: path.join(
+      __dirname,
+      'src',
+      'entries',
+      'background',
+      'background.ts'
+    ),
+    'content_script-comms-proxy': path.join(
+      __dirname,
+      'src',
+      'entries',
+      'content_script',
+      'comms-proxy.ts'
+    ),
+    devtools: path.join(__dirname, 'src', 'entries', 'Devtools', 'index.ts'),
+    panel: path.join(__dirname, 'src', 'entries', 'Panel', 'index.tsx'),
   },
   chromeExtensionBoilerplate: {
-    notHotReload: ['contentScript', 'devtools'],
+    notHotReload: ['content_script-comms-proxy', 'devtools'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -163,13 +182,19 @@ var options = {
       ],
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.html'),
+      template: path.join(
+        __dirname,
+        'src',
+        'entries',
+        'Devtools',
+        'index.html'
+      ),
       filename: 'devtools.html',
       chunks: ['devtools'],
       cache: false,
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
+      template: path.join(__dirname, 'src', 'entries', 'Panel', 'index.html'),
       filename: 'panel.html',
       chunks: ['panel'],
       cache: false,
@@ -181,7 +206,7 @@ var options = {
 };
 
 if (env.NODE_ENV === 'development') {
-  options.devtool = 'cheap-module-source-map';
+  options.devtool = 'inline-cheap-module-source-map';
 } else {
   options.optimization = {
     minimize: true,

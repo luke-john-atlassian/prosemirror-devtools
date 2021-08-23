@@ -1,2 +1,4 @@
-export { StateExplorer } from "./StateExplorer/StateExplorer";
-export { usePluginStates } from "./usePluginStates";
+export { setupUiExportedActions } from "./exportedActions";
+export type { SharedUiActions } from "./exportedActions";
+
+export { App } from "./App";
