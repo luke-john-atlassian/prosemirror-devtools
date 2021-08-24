@@ -1,5 +1,7 @@
 # ProseMirror devtools
 
+**Warning**: This tooling is provided as-is and is not currently supported. It is still under development.
+
 ## Key Features
 
 - Browser extension (supports chromium browsers)
