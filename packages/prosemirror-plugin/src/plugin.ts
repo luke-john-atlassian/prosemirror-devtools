@@ -1,40 +1,33 @@
 import { Plugin, PluginKey } from "prosemirror-state";
-import { initializeExportedActions } from "./actions/exportedPluginActions";
 
 import { createPluginState, PluginState } from "./createPluginState";
-import { initializeImportedActions } from "./importedActions";
-
-import "./local-state";
+import { notifyTrackedPmEditors } from "./local-state";
 
 export const pluginKey = new PluginKey("devtools-plugin");
 
-export function createPlugin(runtime: "page" | "node") {
-  initializeExportedActions(runtime);
-  initializeImportedActions(runtime);
+export const devtoolsPlugin = new Plugin({
+  key: pluginKey,
+  view: (editorView) => {
+    const state: PluginState = pluginKey.getState(editorView.state);
+    state.register(editorView);
 
-  const plugin = new Plugin({
-    key: pluginKey,
-    view: (editorView) => {
-      const state: PluginState = pluginKey.getState(editorView.state);
-      state.register(editorView);
+    notifyTrackedPmEditors();
 
-      return {
-        update: (view, prevState) => {},
-        destroy: () => {
-          state.unregister();
-        },
-      };
-    },
-    state: {
-      init(config, pluginState) {
-        return createPluginState(pluginState);
+    return {
+      update: (view, prevState) => {},
+      destroy: () => {
+        state.unregister();
       },
-      apply(tr, value, oldState, newState) {
-        value.update(newState, tr);
-        return value;
-      },
+    };
+  },
+  state: {
+    init(config, pluginState) {
+      return createPluginState(pluginState);
     },
-  });
-
-  return plugin;
-}
+    apply(tr, value, oldState, newState) {
+      value.update(newState, tr);
+      return value;
+    },
+  },
+  appendTransaction(transactions, oldState, newState) {},
+});

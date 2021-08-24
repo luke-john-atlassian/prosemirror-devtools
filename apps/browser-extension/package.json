@@ -13,11 +13,6 @@
     "start": "node utils/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
   },
-  "alias": {
-    "@luke-john/prosemirror-devtools-plugin": "../prosemirror-plugin/src/index.ts",
-    "@luke-john/prosemirror-devtools-shared-ui": "../shared-ui/src/index.tsx",
-    "@luke-john/prosemirror-devtools-shared-utils": "../shared-utils/src/index.tsx"
-  },
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",

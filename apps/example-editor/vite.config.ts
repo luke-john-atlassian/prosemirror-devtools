@@ -7,15 +7,19 @@ const config: UserConfig = {
     alias: {
       "@luke-john/prosemirror-devtools-shared-ui": path.resolve(
         __dirname,
-        "../shared-ui/src/index.tsx"
+        "../../packages/shared-ui/src/index.tsx"
       ),
-      "@luke-john/prosemirror-devtools-plugin": path.resolve(
+      "@luke-john/prosemirror-devtools-plugin/node": path.resolve(
         __dirname,
-        "../prosemirror-plugin/src/index.ts"
+        "../../packages/prosemirror-plugin/src/node.ts"
+      ),
+      "@luke-john/prosemirror-devtools-plugin/window": path.resolve(
+        __dirname,
+        "../../packages/prosemirror-plugin/src/window.ts"
       ),
       "@luke-john/prosemirror-devtools-shared-utils": path.resolve(
         __dirname,
-        "../shared-utils/src/index.ts"
+        "../../packages/shared-utils/src/index.ts"
       ),
     },
   },

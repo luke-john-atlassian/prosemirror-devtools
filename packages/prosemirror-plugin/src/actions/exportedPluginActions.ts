@@ -1,16 +1,32 @@
-import { setupExportedActions } from "@luke-john/prosemirror-devtools-shared-utils";
-import { socket } from "../setupNode";
-
 import {
   getEditorHistoryEntry,
   getTrackedPmEditor,
   getTrackedPmEditors,
 } from "../local-state";
+import { codeEval } from "./codeEval";
 
 import { getSerializableHistoryEntry } from "./getSerializableHistoryEntry";
 import { getSerializableSchema } from "./serializationUtils/getSerializableSchema";
 
 export const exportedPluginActions = {
+  runTransaction(editorId: number, code: string) {
+    const trackedPmEditor = getTrackedPmEditor(editorId)!;
+
+    try {
+      codeEval(code, {
+        editorView: trackedPmEditor.editorView,
+        editorState: trackedPmEditor.editorState,
+      });
+
+      return { status: "success" as const };
+    } catch (err) {
+      return {
+        status: "failure" as const,
+        // @ts-ignore
+        err: err?.message,
+      };
+    }
+  },
   getEditorSchema(editorId: number) {
     const trackedPmEditor = getTrackedPmEditor(editorId)!;
 
@@ -62,33 +78,3 @@ export const exportedPluginActions = {
   },
 };
 export type PluginActions = typeof exportedPluginActions;
-
-export function initializeExportedActions(runtime: "page" | "node") {
-  if (runtime === "page") {
-    setupExportedActions({
-      runtime: "page",
-      exportedActions: exportedPluginActions,
-      postMessage: (message) => {
-        window.postMessage(message, "*");
-      },
-      registerEventListener: (eventListener) => {
-        window.addEventListener("message", (event) =>
-          eventListener(event.data)
-        );
-      },
-    });
-  } else if (runtime === "node") {
-    setupExportedActions({
-      runtime: "page",
-      exportedActions: exportedPluginActions,
-      postMessage: (message) => {
-        socket.emit("pm-devtools", message);
-      },
-      registerEventListener: (eventListener) => {
-        socket.on("pm-devtools", (message) => {
-          eventListener(message);
-        });
-      },
-    });
-  }
-}

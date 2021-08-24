@@ -3,9 +3,7 @@
   "private": false,
   "version": "0.2.0",
   "description": "",
-  "source": "src/index.ts",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "watch": "tsc --watch",
     "build": "rm -r node_modules && tsc"

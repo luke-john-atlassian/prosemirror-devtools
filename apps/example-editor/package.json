@@ -13,11 +13,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "alias": {
-    "@luke-john/prosemirror-devtools-plugin": "../prosemirror-plugin/src/index.ts",
-    "@luke-john/prosemirror-devtools-shared-ui": "../shared-ui/src/index.tsx",
-    "@luke-john/prosemirror-devtools-shared-utils": "../shared-utils/src/index.ts"
-  },
   "devDependencies": {
     "@babel/preset-env": "^7.15.0",
     "@tsconfig/node16": "^1.0.1",

@@ -4,7 +4,6 @@ import { useAsync } from "react-async-hook";
 import { useActions } from "../../ActionsProvider";
 import { useRegisteredAppState } from "../../AppStateProvider";
 import { StateExplorer } from "../../components/Doc/NewStateExplorer";
-import { Structure } from "../../components/Doc/Structure";
 import { SplitView, SplitViewCol } from "../../components/SplitView"; // import { AsyncStateExplorer } from "../../components/InProgressStateExplorer/StateExplorer";
 
 import { Timeline } from "./Timeline";
@@ -31,8 +30,6 @@ export function History() {
 
   const selectedHistory = historyEntries[selectedIndex];
 
-  console.log({ selectedHistory });
-
   return (
     <SplitView>
       <SplitViewCol noPaddings minWidth={190}>
@@ -47,11 +44,7 @@ export function History() {
       <SplitViewCol grow sep>
         {selectedHistory ? (
           <AsyncHistoryStructure selectedHistory={selectedHistory} />
-        ) : // <AsyncStateExplorer
-        //   editorId={selectedEditor.created}
-        //   id={selectedHistory}
-        // />
-        null}
+        ) : null}
       </SplitViewCol>
     </SplitView>
   );

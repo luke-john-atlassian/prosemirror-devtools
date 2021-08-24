@@ -16,9 +16,18 @@
     "noEmit": false,
     "jsx": "react",
     "paths": {
-      "@luke-john/prosemirror-devtools-shared-ui": ["../shared-ui/src"],
-      "@luke-john/prosemirror-devtools-shared-utils": ["../shared-utils/src"],
-      "@luke-john/prosemirror-devtools-plugin": ["../prosemirror-plugin/src"]
+      "@luke-john/prosemirror-devtools-shared-ui": [
+        "../../packages/shared-ui/src/index.tsx"
+      ],
+      "@luke-john/prosemirror-devtools-shared-utils": [
+        "../../packages/shared-utils/src/index.ts"
+      ],
+      "@luke-john/prosemirror-devtools-plugin/window": [
+        "../../packages/prosemirror-plugin/src/window.ts"
+      ],
+      "@luke-john/prosemirror-devtools-plugin": [
+        "../../packages/prosemirror-plugin/src/index.ts"
+      ]
     }
   },
   "include": ["src"],

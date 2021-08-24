@@ -3,9 +3,24 @@
   "private": false,
   "version": "0.5.0",
   "description": "",
-  "source": "src/index.ts",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    "socket": "./dist/node.js",
+    "window": "./dist/window.js"
+  },
+  "//. ": "workaround for typescript not supporting package exports",
+  "//..": "https://github.com/microsoft/TypeScript/issues/33079",
+  "@types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "socket": [
+        "dist/socket"
+      ],
+      "window": [
+        "dist/window"
+      ]
+    }
+  },
   "scripts": {
     "watch": "tsc --watch",
     "build": "rm -rf dist && npm exec tsc"
@@ -15,12 +30,8 @@
   "peerDependencies": {
     "prosemirror-state": "^1.3.4"
   },
-  "alias": {
-    "@luke-john/prosemirror-devtools-shared-utils": "../shared-utils/src/index.ts",
-    "@luke-john/prosemirror-devtools-shared-ui": "../shared-ui/src/index.ts"
-  },
   "devDependencies": {
-    "@luke-john/prosemirror-devtools-shared-ui": "0.2.0",
+    "@luke-john/prosemirror-devtools-shared-ui": "^0.0.0",
     "@types/prosemirror-commands": "^1.0.4",
     "@types/prosemirror-keymap": "^1.0.4",
     "@types/prosemirror-model": "^1.13.2",
@@ -34,7 +45,9 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@luke-john/prosemirror-devtools-shared-utils": "0.2.0",
+    "@luke-john/prosemirror-devtools-shared-utils": "0.2.0"
+  },
+  "optionalDependencies": {
     "socket.io-client": "^4.1.3"
   }
 }

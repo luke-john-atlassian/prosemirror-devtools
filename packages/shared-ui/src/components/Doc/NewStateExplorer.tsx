@@ -39,12 +39,14 @@ export function StateExplorer({
       <Structure schema={schema} doc={document} />
       <SelectionInfo />
       <TransactionDetails />
+      <StateDocumentViewer />
     </DocumentContextProvider>
   );
 }
 
 import { ObjectInspector } from "react-inspector";
 import { Structure } from "./Structure";
+import { StateDocumentViewer } from "../InProgressStateExplorer/StateDocumentViewer";
 
 const TransactionContainer = styled.div`
   font-family: sans-serif;

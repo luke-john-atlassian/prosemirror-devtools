@@ -8,15 +8,6 @@ import {
   updatePmEditor,
 } from "./local-state";
 
-/**
- * 
-      const pluginStatesList = [...__trackedPluginStates];
-      const exposedPluginStates = pluginStatesList.map(
-        prepareExportedPluginState
-      );
-      linkedDevtoolsActions.updatePluginStates(exposedPluginStates);
- */
-
 export type PluginState = {
   update: (pluginState: any, transaction: any) => void;
   unregister: () => void;
@@ -54,8 +45,6 @@ export function createPluginState(editorState: EditorState<any>): PluginState {
       trackPmEditor(trackedPmEditor);
     },
   };
-
-  updatePmEditor(trackedPmEditor);
 
   return pluginState;
 }

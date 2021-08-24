@@ -13,11 +13,9 @@
     "changeset": "npx changeset"
   },
   "workspaces": [
-    "packages/chrome-extension",
     "packages/shared-ui",
-    "packages/shared-utils",
     "packages/prosemirror-plugin",
-    "packages/example"
+    "packages/shared-utils"
   ],
   "dependencies": {
     "@changesets/cli": "^2.16.0",

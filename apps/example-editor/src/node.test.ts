@@ -8,9 +8,7 @@ import { schema } from "prosemirror-schema-basic";
 // @ts-ignore
 import { exampleSetup } from "prosemirror-example-setup";
 
-import { createPlugin as createProsemirrorDevtoolsPlugin } from "@luke-john/prosemirror-devtools-plugin";
-
-const devtoolsPlugin = createProsemirrorDevtoolsPlugin("node");
+import { devtoolsPlugin } from "@luke-john/prosemirror-devtools-plugin/node";
 
 const plugins = exampleSetup({ schema });
 plugins.push(devtoolsPlugin);
@@ -34,9 +32,15 @@ test("adds 1 + 2 to equal 3", async () => {
 
   let tr = editorView.state.tr;
 
-  tr.insertText("Wash your hands mate! ");
+  tr.insertText("Wash your hands! ");
 
   editorView.dispatch(tr);
+
+  let tr2 = editorView.state.tr;
+
+  tr2.insertText("And again! ");
+
+  editorView.dispatch(tr2);
 
   await new Promise((res) => {});
 

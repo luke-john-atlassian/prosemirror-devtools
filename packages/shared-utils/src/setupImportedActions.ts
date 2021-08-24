@@ -23,7 +23,8 @@ export function setupImportedActions<ImportedActions extends ExportedActions>({
 }) {
   const subscriptions: [
     id: number,
-    cb: (status: "failure" | "success", data: any) => void
+    cb: (status: "failure" | "success", data: any) => void,
+    message: any
   ][] = [];
   const actionsClient = {} as AsyncActions<ImportedActions>;
 
@@ -54,6 +55,7 @@ export function setupImportedActions<ImportedActions extends ExportedActions>({
                 }
                 res(data);
               },
+              message,
             ]);
           });
 
@@ -89,7 +91,10 @@ export function setupImportedActions<ImportedActions extends ExportedActions>({
     const subscriptionIndex = subscriptions.findIndex((subscription) => {
       return subscription[0] === message.id;
     });
-    const [[, cb]] = subscriptions.splice(subscriptionIndex, 1);
+    const [[, cb, _originalMessage]] = subscriptions.splice(
+      subscriptionIndex,
+      1
+    );
     cb(message.type, message.response);
   }
 

@@ -14,22 +14,17 @@ var alias = {
   react: path.resolve(__dirname, './node_modules/react'),
   '@emotion/styled': path.resolve(__dirname, './node_modules/@emotion/styled'),
   'react-inspector': path.resolve(__dirname, './node_modules/react-inspector'),
-
   'react-async-hook': path.resolve(
     __dirname,
     './node_modules/react-async-hook'
   ),
-  '@luke-john/prosemirror-devtools-plugin': path.resolve(
-    __dirname,
-    '../prosemirror-plugin/src/index.ts'
-  ),
   '@luke-john/prosemirror-devtools-shared-ui': path.resolve(
     __dirname,
-    '../shared-ui/src/index.tsx'
+    '../../packages/shared-ui/src/index.tsx'
   ),
   '@luke-john/prosemirror-devtools-shared-utils': path.resolve(
     __dirname,
-    '../shared-utils/src/index.ts'
+    '../../packages/shared-utils/src/index.ts'
   ),
 };
 

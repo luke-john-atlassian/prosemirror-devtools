@@ -27,7 +27,8 @@ export function trackPmEditor(pmEditorToTrack: TrackedPmEditor) {
 export function untrackPmEditor(pmEditorToTrack: TrackedPmEditor) {
   delete trackedPmEditors[pmEditorToTrack.created];
 }
-export function updatePmEditor(_pmEditorToTrack: TrackedPmEditor) {
+
+export async function notifyTrackedPmEditors() {
   const serializableTrackedPmEditors = Object.values(trackedPmEditors).map(
     (trackedPmEditor) => {
       return {
@@ -36,8 +37,12 @@ export function updatePmEditor(_pmEditorToTrack: TrackedPmEditor) {
       };
     }
   );
-
-  linkedDevtoolsActions.updateTrackedPmEditors(serializableTrackedPmEditors);
+  await linkedDevtoolsActions.updateTrackedPmEditors(
+    serializableTrackedPmEditors
+  );
+}
+export function updatePmEditor(_pmEditorToTrack: TrackedPmEditor) {
+  notifyTrackedPmEditors();
 }
 
 export function getTrackedPmEditors() {

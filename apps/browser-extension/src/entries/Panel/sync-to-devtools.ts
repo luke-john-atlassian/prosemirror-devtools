@@ -1,4 +1,4 @@
-import { PluginActions } from '@luke-john/prosemirror-devtools-plugin';
+import type { PluginActions } from '@luke-john/prosemirror-devtools-plugin';
 import { setupImportedActions } from '@luke-john/prosemirror-devtools-shared-utils';
 import { setupUiExportedActions } from '@luke-john/prosemirror-devtools-shared-ui';
 

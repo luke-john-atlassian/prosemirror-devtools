@@ -12,6 +12,7 @@ import { useAppState, useRegisteredAppState } from "./AppStateProvider";
 import { History } from "./TabPanels/History/History";
 import { State } from "./TabPanels/State/State";
 import { TabBar } from "./components/TabBar";
+import { Playground } from "./TabPanels/Playground/Playground";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ export function RegisteredApp() {
               <History />
             </TabPanel>
             <TabPanel value={selectedTabIndex} index={2}>
-              Item Three
+              <Playground />
             </TabPanel>
           </>
         ) : (

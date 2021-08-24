@@ -11,7 +11,9 @@ function getSelectValue(created: number) {
   const date = new Date(created);
   return {
     value: created,
-    label: `Created: ${date.toLocaleTimeString()}.${date.getMilliseconds()} [active]`,
+    // TODO add active editor indicator
+    // (requires new subscription, or update to existing _trackedPmEditors subsciption)
+    label: `Created: ${date.toLocaleTimeString()}.${date.getMilliseconds()}`,
   };
 }
 
